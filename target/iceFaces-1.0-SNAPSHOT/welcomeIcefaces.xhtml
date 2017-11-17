@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <h:head>
+        <title>ICEfaces Welcome Page</title>
+        <!-- This line is only for ICE component, remove it if no ice component is used in this page.-->
+        <link rel="stylesheet" type="text/css" href="./xmlhttp/css/rime/rime.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+
+            <ace:panel header="Welcome to ICEfaces">
+                <h:panelGrid columns="1">
+                    <!-- NOTICE -To run this page you must have also ICEfaces ACE components library on your classpath (project dependencies). -->
+                    <ace:linkButton id="linkButton1" value="ICEfaces Overview" href="http://wiki.icesoft.org/display/ICE/ICEfaces+Overview"></ace:linkButton>
+                    <ace:linkButton id="linkButton2" value="General Documentation" href="http://wiki.icesoft.org/display/ICE/ICEfaces+Documentation"></ace:linkButton>
+                    <ace:linkButton id="linkButton3" value="ICEfaces Demos" href="http://www.icesoft.org/demos/icefaces-demos.jsf"></ace:linkButton>
+                    <ace:linkButton id="linkButton4" value="Tutorials" href="http://www.icesoft.org/community/tutorials-samples.jsf"></ace:linkButton>
+                    <ace:linkButton id="linkButton5" value="ACE components" href="http://wiki.icesoft.org/display/ICE/ACE+Components"></ace:linkButton>
+                    <ace:linkButton id="linkButton6" value="ICE components" href="http://wiki.icesoft.org/display/ICE/ICE+Components"></ace:linkButton>
+                    <!-- You can also use ICE components. Adds ICE namespace in that case: xmlns:ice="http://www.icesoft.com/icefaces/component" -->
+                    <!-- <ice:outputLink id="aceLink" value="http://wiki.icesoft.org/display/ICE/ACE+Components" target="_blank">ACE components</ice:outputLink> -->
+                    <!-- <ice:outputLink id="iceLink" value="http://wiki.icesoft.org/display/ICE/ICE+Components" target="_blank">ICE components</ice:outputLink> -->
+                </h:panelGrid>
+            </ace:panel>
+
+        </h:form>
+        <h:form id="textEntryForm">
+            <ace:panel id="personalInfoInputPanel" header="Personal Info" styleClass="required-styling-demo">
+                <h:panelGrid id="inputGrid" columns="1" width="100%" styleClass="textEntryInputTable">
+                    <ace:textEntry id="firstNameInput" value="#{textEntryBean.firstName}" label="First Name" labelPosition="left" required="true" requiredIndicator="(*)" indicatorPosition="right">
+                        <ace:ajax render="@this firstNameOutput firstNameMsg" event="blur"/>
+                    </ace:textEntry>
+                    
+                    <ace:textEntry id="lastNameInput" value="#{textEntryBean.lastName}" label="Last Name" labelPosition="left" required="true" requiredIndicator="(*)" indicatorPosition="right">
+                        <ace:ajax render="@this lastNameOutput lastNameMsg" event="blur"/>
+                    </ace:textEntry>
+
+                    <ace:textEntry id="address1Input" value="#{textEntryBean.address1}" label="Apt./Suite #" labelPosition="left" required="true" requiredIndicator="(*)" indicatorPosition="right">
+                        <ace:ajax render="@this address1Output address1Msg" event="blur"/>
+                    </ace:textEntry>
+
+                    <ace:textEntry id="address2Input" value="#{textEntryBean.address2}" label="Street Address" labelPosition="left" required="false" optionalIndicator="(Opt.)" indicatorPosition="right">
+                        <ace:ajax render="@this address2Output" event="blur"/>
+                    </ace:textEntry>
+
+                    <ace:textEntry id="cityInput" value="#{textEntryBean.city}" label="City" labelPosition="left" required="true" requiredIndicator="(*)" indicatorPosition="right">
+                        <ace:ajax render="@this cityOutput cityMsg" event="blur"/>
+                    </ace:textEntry>
+                    
+                    <ace:textEntry id="provinceInput" value="#{textEntryBean.province}" label="Prov./State" labelPosition="left" required="false" optionalIndicator="(Opt.)" indicatorPosition="right">
+                        <ace:ajax render="@this provinceOutput provinceMsg" event="blur"/>
+                        <f:validateLength minimum="2"/>
+                    </ace:textEntry>
+
+                    <ace:textEntry id="countryInput" value="#{textEntryBean.country}" label="Country" labelPosition="left" required="true" requiredIndicator="(*)" indicatorPosition="right">
+                        <ace:ajax render="@this countryOutput countryMsg" event="blur"/>
+                    </ace:textEntry>
+                </h:panelGrid>
+                <h:panelGrid width="100%">
+                    <ace:message id="firstNameMsg" for="firstNameInput"/>
+                    <ace:message id="lastNameMsg" for="lastNameInput"/>
+                    <ace:message id="address1Msg" for="address1Input"/>
+                    <ace:message id="cityMsg" for="cityInput"/>
+                    <ace:message id="provinceMsg" for="provinceInput"/>
+                    <ace:message id="countryMsg" for="countryInput"/>
+                </h:panelGrid>
+            </ace:panel>
+            
+            <ace:panel id="personalInfoOutputPanel" header="Entered data">
+                <h:panelGrid id="outputGrid" width="100%" style="text-align: left;">
+                    <h:outputText id="firstNameOutput" value="first name: #{textEntryBean.firstName}"/>
+                    <h:outputText id="lastNameOutput" value="last name: #{textEntryBean.lastName}"/>
+                    <h:outputText id="address1Output" value="address: #{textEntryBean.address1}"/>
+                    <h:outputText id="address2Output" value="address(cont.): #{textEntryBean.address2}"/>
+                    <h:outputText id="cityOutput" value="city: #{textEntryBean.city}"/>
+                    <h:outputText id="provinceOutput" value="province: #{textEntryBean.province}"/>
+                    <h:outputText id="countryOutput" value="country: #{textEntryBean.country}"/>
+                </h:panelGrid>
+            </ace:panel>
+        </h:form>
+        
+    </h:body>
+</html>
